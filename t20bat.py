@@ -13,7 +13,7 @@ import plotly.express as px
 from html import escape
 import streamlit.components.v1 as components
 
-DATA_PATH = "https://www.dropbox.com/scl/fi/owb8ss34vxpgx9jkhvrmu/t20_bbb.csv?rlkey=go0772z0mtamilzof93yjcon8DATA_PATH = "data/t20_bbb.csv.gz"st=vn470yulDATA_PATH = "data/t20_bbb.csv.gz"dl=1"
+DATA_PATH = "https://www.dropbox.com/scl/fi/owb8ss34vxpgx9jkhvrmu/t20_bbb.csv?rlkey=go0772z0mtamilzof93yjcon8DATA_PATH = "https://www.dropbox.com/scl/fi/owb8ss34vxpgx9jkhvrmu/t20_bbb.csv?rlkey=go0772z0mtamilzof93yjcon8DATA_PATH = "data/t20_bbb.csv.gz"st=vn470yulDATA_PATH = "data/t20_bbb.csv.gz"dl=1"st=vn470yulDATA_PATH = "https://www.dropbox.com/scl/fi/owb8ss34vxpgx9jkhvrmu/t20_bbb.csv?rlkey=go0772z0mtamilzof93yjcon8DATA_PATH = "data/t20_bbb.csv.gz"st=vn470yulDATA_PATH = "data/t20_bbb.csv.gz"dl=1"dl=1"
 
 # -------------------------
 # Wagon Wheel plotter
@@ -181,22 +181,29 @@ def get_bg_colors(bg="dark"):
 # -------------------------
 # Load data
 # -------------------------
-@st.cache_data
-def load_data(path=DATA_PATH):
-    try:
-        df = pd.read_csv(path, compression="gzip", low_memory=False)
-    except FileNotFoundError:
-        return pd.DataFrame()
-    df.columns = [c.strip() for c in df.columns]
-    for c in df.select_dtypes(include=["object"]).columns:
-        df[c] = df[c].replace("", np.nan)
-    if "date" in df.columns:
-        try:
-            df["date"] = pd.to_datetime(df["date"]).dt.date
-        except Exception:
-            pass
-    return df
+import time
 
+@st.cache_data(show_spinner="Loading 1M+ T20 ball-by-ball records... (first load ~45 sec)")
+def load_data(path=DATA_PATH):
+    for attempt in range(3):
+        try:
+            st.info(f"Downloading full dataset... (attempt {attempt+1}/3)")
+            df = pd.read_csv(path, low_memory=False)
+            st.success(f"Loaded {len(df):,} deliveries successfully!")
+            df.columns = [c.strip() for c in df.columns]
+            for c in df.select_dtypes(include=["object"]).columns:
+                df[c] = df[c].replace("", np.nan)
+            if "date" in df.columns:
+                try:
+                    df["date"] = pd.to_datetime(df["date"], errors="coerce").dt.date
+                except:
+                    pass
+            return df
+        except Exception as e:
+            st.warning(f"Attempt {attempt+1} failed: {str(e)[:120]}")
+            time.sleep(5)
+    st.error("Failed to load full dataset after 3 attempts. App will run with no data.")
+    return pd.DataFrame()
 # -------------------------
 # Empty plot helper
 # -------------------------
