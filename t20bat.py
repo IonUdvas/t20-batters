@@ -1792,7 +1792,7 @@ with main_container:
                     st.download_button("Download Zone Other Metrics (CSV)", csv2, file_name=f"{selected_batter}_advanced_zones.csv", mime="text/csv")
 
     # About the data
-    st.markdown(f'<div class="custom-note" style="color:{note_col};"><b>About the data:</b><br/>The original dataset used for the study, compiled by Himanish Ganjoo, consists of ball by ball data for 10,48,575 deliveries bowled in T20 cricket from January 01, 2015 to October 18, 2025, involving 7646 batters and 5662 bowlers in 9171 matches. Explicit data on lines and lengths are available for 8,00,895 deliveries in the dataset, depending on which the pitchmaps have been plotted.<br/><br/><i>Data last updated on: October 18, 2025</i><br/><i>Software last updated on: December 12, 2025</i></div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="custom-note" style="color:{note_col};"><b>About the data:</b><br/>The original dataset used for the study, compiled by Himanish Ganjoo, consists of ball by ball data for 20,91,210 deliveries bowled in T20 cricket from January 01, 2015 to October 18, 2025, involving 7646 batters and 5662 bowlers in 9171 matches. Explicit data on lines and lengths are available for not all, but a significant subset of the deliveries in the dataset, depending on which the pitchmaps have been plotted.<br/><br/><i>Data last updated on: October 18, 2025</i><br/><i>Software last updated on: December 12, 2025</i></div>', unsafe_allow_html=True)
 
     if st.session_state["run_pressed"]:
         try:
