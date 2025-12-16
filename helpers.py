@@ -26,3 +26,27 @@ def load_data(path=DATA_PATH):
             time.sleep(5)
     st.error("Could not load data after 3 attempts. Running with empty dataset.")
     return pd.DataFrame()
+
+def get_bg_colors(bg="dark"):
+    if bg == "white":
+        return {
+            "page_bg": "#FFFFFF",
+            "panel_bg": "#FFFFFF",
+            "plot_bg": "#FFFFFF",
+            "text_col": "#111111",
+            "tile_na": "#FFFFFF",
+            "tile_border": "#D9D9D9",
+            "accent": "#00E5FF",
+            "note_col": "#111111"
+        }
+    else:
+        return {
+            "page_bg": "#0b0c2a",
+            "panel_bg": "#1F1F22",
+            "plot_bg": "#0b0c2a",
+            "text_col": "#111111",
+            "tile_na": "#1F1F22",
+            "tile_border": "#2C2C2E",
+            "accent": "#00E5FF",
+            "note_col": "#111111"
+        }

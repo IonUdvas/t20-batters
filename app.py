@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 
 from helpers import load_data
+from helpers import get_bg_colors
 
 DATA_PATH = "t20_bbb.parquet"
 
