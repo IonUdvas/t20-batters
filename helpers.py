@@ -5,7 +5,7 @@ import numpy as np
 
 DATA_PATH = "t20_bbb.parquet"
 
-@st.cache_data(show_spinner="Loading 1M+ T20 deliveries... (first load may take some while)")
+# @st.cache_data(show_spinner="Loading 1M+ T20 deliveries... (first load may take some while)")
 def load_data(path=DATA_PATH):
     return pd.read_parquet(path)
     # for attempt in range(3):
@@ -28,7 +28,7 @@ def load_data(path=DATA_PATH):
     # st.error("Could not load data after 3 attempts. Running with empty dataset.")
     # return pd.DataFrame()
 
-def get_bg_colors(bg="dark"):
+# def get_bg_colors(bg="dark"):
     if bg == "white":
         return {
             "page_bg": "#FFFFFF",
