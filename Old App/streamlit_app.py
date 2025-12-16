@@ -189,7 +189,6 @@ import time
 
 @st.cache_data(show_spinner="Loading 1M+ T20 deliveries... (first load may take some while)")
 def load_data(path=DATA_PATH):
-    import time
     for attempt in range(3):
         try:
             with st.spinner(f"Downloading full dataset... (attempt {attempt+1}/3)"):
