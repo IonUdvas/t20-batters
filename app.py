@@ -56,7 +56,7 @@ body {{ background-color: {get_bg_colors('dark')['page_bg']}; color: {get_bg_col
 .svtable-wrapper th, .svtable-wrapper td {{ padding:6px 8px; border:1px solid #eee; text-align:left; vertical-align:top; }}
 </style>
 """
-st.markdown(base_css, unsafe_allow_html=True)
+# st.markdown(base_css, unsafe_allow_html=True)
 
 st.title("Men's T20s: Batters' Analysis")
 
